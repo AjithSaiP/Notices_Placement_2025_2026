@@ -1,0 +1,169 @@
+/* =================================================
+   Apple-like Premium UI – Notice Dashboard
+   Inspired by apple.com & developer.apple.com
+   ================================================= */
+
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --border: #e5e5ea;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --accent: #0071e3;
+  --accent-soft: rgba(0,113,227,0.12);
+  --html: #1c7c3a;
+  --pdf: #b45309;
+}
+
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: -apple-system, BlinkMacSystemFont,
+               "SF Pro Text", "SF Pro Display",
+               "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(#f5f5f7, #f2f2f5);
+  color: var(--text);
+}
+
+/* ---------- Page Header ---------- */
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+/* ---------- Search ---------- */
+#searchBox {
+  width: 460px;
+  max-width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  outline: none;
+  margin-bottom: 26px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+#searchBox::placeholder {
+  color: var(--muted);
+}
+
+#searchBox:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+/* ---------- Card Wrapper ---------- */
+.table-wrapper {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 6px;
+  overflow-x: auto;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* ---------- Table ---------- */
+table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* ---------- Header ---------- */
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: saturate(180%) blur(12px);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Rows ---------- */
+tbody tr {
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+tbody tr:hover {
+  background: #fafafa;
+}
+
+/* ---------- Cells ---------- */
+td {
+  padding: 16px 14px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Column Widths ---------- */
+th:nth-child(1), td:nth-child(1) { width: 100px; font-weight: 600; }
+th:nth-child(2), td:nth-child(2) { width: 180px; }
+th:nth-child(3), td:nth-child(3) { width: 260px; }
+th:nth-child(4), td:nth-child(4) { width: 380px; }
+th:nth-child(5), td:nth-child(5) { width: 160px; }
+th:nth-child(6), td:nth-child(6),
+th:nth-child(7), td:nth-child(7) {
+  width: 90px;
+  text-align: center;
+}
+
+/* ---------- Links ---------- */
+a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.html-link {
+  color: var(--html);
+}
+
+.pdf-link {
+  color: var(--pdf);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Empty PDF ---------- */
+td:has(:not(a)) {
+  color: var(--muted);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 1200px) {
+  body {
+    padding: 20px;
+  }
+
+  table {
+    min-width: 1050px;
+  }
+}
