@@ -119,7 +119,7 @@ function searchTable() {
                     r.compact
                 )
 
-            ){
+            ) {
 
                 r.el.style.display = "";
 

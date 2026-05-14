@@ -23,15 +23,36 @@ a { color: #0066cc; text-decoration: none; }
 </style>
 
 <script>
-function searchTable() {
-    const filter = document.getElementById("searchBox").value.toLowerCase();
-    const rows = document.getElementById("noticeTable").rows;
-    for (let i = 1; i < rows.length; i++) {
-        rows[i].style.display =
-            rows[i].innerText.toLowerCase().includes(filter) ? "" : "none";
-    }
+let rows = [];
+let cachedText = [];
+
+/* Run once on page load */
+window.addEventListener("DOMContentLoaded", () => {
+  rows = Array.from(document.querySelectorAll("#noticeTable tbody tr"));
+  cachedText = rows.map(r => r.textContent.toLowerCase());
+});
+
+/* Debounce utility */
+function debounce(fn, delay) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
 }
+
+/* Fast search */
+function fastSearch(value) {
+  const q = value.toLowerCase();
+  rows.forEach((row, i) => {
+    row.style.display = cachedText[i].includes(q) ? "" : "none";
+  });
+}
+
+/* Debounced version */
+const searchDebounced = debounce(fastSearch, 120);
 </script>
+
 </head>
 
 <body>
@@ -39,10 +60,10 @@ function searchTable() {
 <h2>IIT KGP Placement Notices</h2>
 
 <input
-    type="text"
-    id="searchBox"
-    onkeyup="searchTable()"
-    placeholder="Search by notice number, company, or title..."
+  type="text"
+  id="searchBox"
+  oninput="searchDebounced(this.value)"
+  placeholder="Search by notice number, company, or title..."
 >
 
 <table id="noticeTable">
